@@ -6,12 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--Button for generating the PDF file-->
     <Button
         android:id="@+id/idBtnGeneratePDF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Generate PDF" />
+        android:layout_marginLeft="120dp"
+        android:text="Generate PDF"
+        />
+
+    <Button
+        android:id="@+id/idBtnGenerateExl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:text="Generate Exl"
+        android:layout_below="@+id/idBtnGeneratePDF"
+        />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_below="@+id/idBtnGenerateExl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
 </RelativeLayout>
