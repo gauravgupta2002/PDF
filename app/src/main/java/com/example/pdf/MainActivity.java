@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void createPdf(ArrayList<String> arrayList) {
+    /*private void createPdf(ArrayList<String> arrayList) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,6 +160,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }*/
+
+    //added
+    private void createPdf(ArrayList<String> arrayList) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PdfDocument pdfDocument = new PdfDocument();
+                Paint paint = new Paint();
+
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(250, 400, 1).create();
+                PdfDocument.Page myPage = pdfDocument.startPage(pageInfo);
+
+                Canvas canvas = myPage.getCanvas();
+
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(12.0f);
+                canvas.drawText("JOSAA 2022", pageInfo.getPageWidth() / 2, 30, paint);
+
+                paint.setTextSize(6.0f);
+                canvas.drawText("IIT NIT IIIT CFTI", pageInfo.getPageWidth() / 2, 40, paint);
+
+                paint.setTextSize(8.0f);
+                canvas.drawText("College w.r.t. Last Year Closing Rank", pageInfo.getPageWidth() / 2, 60, paint);
+
+                paint.setTextAlign(Paint.Align.LEFT);
+                paint.setTextSize(9.0f);
+
+
+                int startX = 10, startY = 80, endPos = pageInfo.getPageWidth() - 10;
+                for (int i = 0; i < arrayList.size(); i++) {
+                    String data = arrayList.get(i);
+                    canvas.drawText(String.valueOf(i+1), startX , startY, paint);
+                    canvas.drawText(data, startX + 10, startY, paint);
+                    startY += 15;
+                }
+
+
+                pdfDocument.finishPage(myPage);
+
+                //File file = new File(Environment.getExternalStorageDirectory(),"/FirstPdf.pdf");
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/FirstPDF2.pdf");
+                try {
+                    pdfDocument.writeTo(new FileOutputStream(file));
+                    Toast.makeText(MainActivity.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                pdfDocument.close();
+            }
+        });
     }
 
 
