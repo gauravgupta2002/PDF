@@ -114,54 +114,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*private void createPdf(ArrayList<String> arrayList) {
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PdfDocument pdfDocument = new PdfDocument();
-                Paint paint = new Paint();
-
-                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(250, 400, 1).create();
-                PdfDocument.Page myPage = pdfDocument.startPage(pageInfo);
-
-                Canvas canvas = myPage.getCanvas();
-
-                paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(12.0f);
-                canvas.drawText("JOSAA 2022", pageInfo.getPageWidth() / 2, 30, paint);
-
-                paint.setTextSize(6.0f);
-                canvas.drawText("IIT NIT IIIT CFTI", pageInfo.getPageWidth() / 2, 40, paint);
-
-                paint.setTextAlign(Paint.Align.LEFT);
-                paint.setTextSize(9.0f);
-
-                int startX = 10, startY = 60;
-                //canvas.drawText("Welcome",50,50,paint);
-                for (int i = 0; i < arrayList.size(); i++) {
-                    String string = arrayList.get(0);
-                    canvas.drawText(string, startX, startY, paint);
-                    startY = +15;
-                }
-
-
-                pdfDocument.finishPage(myPage);
-
-                //File file = new File(Environment.getExternalStorageDirectory(),"/FirstPdf.pdf");
-                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/FirstPDF2.pdf");
-                try {
-                    pdfDocument.writeTo(new FileOutputStream(file));
-                    Toast.makeText(MainActivity.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                pdfDocument.close();
-            }
-        });
-
-    }*/
-
     //added
     private void createPdf(ArrayList<String> arrayList) {
         button.setOnClickListener(new View.OnClickListener() {
@@ -170,33 +122,46 @@ public class MainActivity extends AppCompatActivity {
                 PdfDocument pdfDocument = new PdfDocument();
                 Paint paint = new Paint();
 
-                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(250, 400, 1).create();
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(500, 7050, 1).create();
                 PdfDocument.Page myPage = pdfDocument.startPage(pageInfo);
 
                 Canvas canvas = myPage.getCanvas();
 
                 paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(12.0f);
-                canvas.drawText("JOSAA 2022", pageInfo.getPageWidth() / 2, 30, paint);
-
-                paint.setTextSize(6.0f);
-                canvas.drawText("IIT NIT IIIT CFTI", pageInfo.getPageWidth() / 2, 40, paint);
+                paint.setTextSize(20.0f);
+                canvas.drawText("JOSAA 2022", pageInfo.getPageWidth() / 2, 20, paint);
 
                 paint.setTextSize(8.0f);
-                canvas.drawText("College w.r.t. Last Year Closing Rank", pageInfo.getPageWidth() / 2, 60, paint);
+                canvas.drawText("IIT NIT IIIT CFTI", pageInfo.getPageWidth() / 2, 35, paint);
+
+               // paint.setTextSize(12.0f);
+               // canvas.drawText("College w.r.t. Last Year Closing Rank", pageInfo.getPageWidth() / 2, 50, paint);
+
+                paint.setTextSize(8.0f);
+                canvas.drawText("App Link : https://leetcode.com/", pageInfo.getPageWidth() / 2, 55, paint);
+                canvas.drawLine(180,63,320,63,paint);
 
                 paint.setTextAlign(Paint.Align.LEFT);
                 paint.setTextSize(9.0f);
 
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(1);
+                canvas.drawRect(8,90,pageInfo.getPageWidth()-10,7040,paint);
 
-                int startX = 10, startY = 80, endPos = pageInfo.getPageWidth() - 10;
+                paint.setStrokeWidth(0);
+                paint.setStyle(Paint.Style.FILL);
+
+
+                int startX = 10, startY = 100, endPos = pageInfo.getPageWidth() - 10;
                 for (int i = 0; i < arrayList.size(); i++) {
                     String data = arrayList.get(i);
                     canvas.drawText(String.valueOf(i+1), startX , startY, paint);
-                    canvas.drawText(data, startX + 10, startY, paint);
+                    canvas.drawText(data, startX + 20, startY, paint);
+                    canvas.drawLine(startX,startY+3,endPos,startY+3,paint);
                     startY += 15;
                 }
 
+                canvas.drawLine(25,90,25,7040,paint);
 
                 pdfDocument.finishPage(myPage);
 
@@ -214,6 +179,69 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+   /* private void createPdf(ArrayList<String> list2) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PdfDocument pdfDocument = new PdfDocument();
+                Paint paint = new Paint();
+
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(500, 1000, 1).create();
+                PdfDocument.Page myPage = pdfDocument.startPage(pageInfo);
+
+                Canvas canvas = myPage.getCanvas();
+                // canvas.drawText("Welcome",50,50,paint);
+
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(20.0f);
+                canvas.drawText("JOSAA 2022", pageInfo.getPageWidth() / 2, 20, paint);
+
+                paint.setTextSize(8.0f);
+                canvas.drawText("IIT NIT IIIT CFTI", pageInfo.getPageWidth() / 2, 35, paint);
+
+               // paint.setTextSize(12.0f);
+               // canvas.drawText("College w.r.t. Last Year Closing Rank", pageInfo.getPageWidth() / 2, 50, paint);
+
+                //paint.setTextSize(8.0f);
+                canvas.drawText("App Link : https://leetcode.com/", pageInfo.getPageWidth() / 2, 50, paint);
+                canvas.drawLine(180,66,320,66,paint);
+
+                paint.setTextAlign(Paint.Align.LEFT);
+                paint.setTextSize(9.0f);
+
+                paint.setStyle(Paint.Style.STROKE);
+                paint.setStrokeWidth(1);
+                canvas.drawRect(8,90,pageInfo.getPageWidth()-10,970,paint);
+
+                paint.setStrokeWidth(0);
+                paint.setStyle(Paint.Style.FILL);
+
+                int startX = 10, startY = 100, endPos = pageInfo.getPageWidth() - 10;
+                for (int i = 0; i < list2.size(); i++) {
+                    String data = list2.get(i);
+                    canvas.drawText(String.valueOf(i+1), startX , startY, paint);
+                    canvas.drawText(data, startX + 30, startY, paint);
+                    canvas.drawLine(startX,startY+3,endPos,startY+3,paint);
+                    startY += 15;
+                }
+
+                canvas.drawLine(40,90,40,970,paint);
+
+                pdfDocument.finishPage(myPage);
+
+                //File file = new File(Environment.getExternalStorageDirectory(),"/FirstPdf.pdf");
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/FirstPDF1.pdf");
+                try {
+                    pdfDocument.writeTo(new FileOutputStream(file));
+                    Toast.makeText(MainActivity.this, "PDF file generated successfully.", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                pdfDocument.close();
+            }
+        });
+    }*/
 
 
 }
